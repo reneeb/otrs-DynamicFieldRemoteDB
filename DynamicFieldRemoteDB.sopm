@@ -1,148 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<otrs_package version="1.1">
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.4) -->
     <Name>DynamicFieldRemoteDB</Name>
-    <Version>5.0.3</Version>
-    <Vendor>c.a.p.e. IT GmbH</Vendor>
-    <URL>http://www.cape-it.de/</URL>
-    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
-    <ChangeLog Version="5.0.3" Date="2016-09-06 15:50:11">Bugfix: T2016080390000871 (fixed undefined variable), T2016082190000444 (changed layout of field to match conditions of KIX4OTRS), T2016082290000504 (missing method StatsSearchFieldParameterBuild), T2016072690000848 (failed to add value by script).</ChangeLog>
-    <ChangeLog Version="5.0.2" Date="2016-06-30 15:47:48">Bugfix: T2016063090000752 (edit field does not handle removed values correctly), T2016063090000752 (internal server error if constricted array value gets removed), T2016063090000449 (unescaped left brace in regexp is deprecated), T2016062890000748 (unnecessary ajax request triggered), T2016060390000464 (added additional check for valid value), T2016053090000816 (MaxQueryResult is not used by ajaxhandler).</ChangeLog>
-    <ChangeLog Version="5.0.1" Date="2016-05-18 11:55:07">CR: T2016021590000341 (DatabaseFieldSearch can comma separated refere to multiple columns), T2016021590000341 (configurable pre-/suffix for searchinput); Bugfix: T2016051890000591 (invalid sql-statement for empty optional constrictions), T2016022590000724 (can not use ticket template with mandatory field), (fixed undefined value as an ARRAY reference), (mandatory fields were not marked correctly), (async ajax calls caused problems with running conditions).</ChangeLog>
-    <ChangeLog Version="5.0.0" Date="2016-01-29 15:55:01">Bugfix: T2016011890001221 (jobs of generic agents have to be checked on upgrade), T2016011890001221 (correct bind for autocomplete search in AdminGenericAgent).</ChangeLog>
-    <ChangeLog Version="4.99.82" Date="2016-01-12 14:37:45">Bugfix: T2016011290000625 (Fixed generation of cache key), T2016011290000018 (Migration of configured links didnt matched every obsolete placeholder).</ChangeLog>
-    <ChangeLog Version="4.99.81" Date="2016-01-08 08:03:35">CR: T2015082690000615 (Removed obsolete objects), T2015082690000615 (Added trigger for removed values), T2015082690000615 (Updated documentation).</ChangeLog>
-    <ChangeLog Version="4.99.80" Date="2016-01-01 14:12:50">CR: T2015082690000615 (reworked layout and handling), T2015082690000615 (changes for use with 5.0.x).</ChangeLog>
-    <Description Lang="en">DynamicField backend to provide access to RemoteDB for OTRS</Description>
+    <Version>6.0.1</Version>
+    <Framework>6.0.x</Framework>
+    <Vendor>Perl-Services.de</Vendor>
+    <URL>http://www.perl-services.de</URL>
     <Description Lang="de">DynamicField-Backend zur Bereitstellung des Zugangs zu Datenbanken fuer OTRS</Description>
-    <Framework>5.0.x</Framework>
-    <IntroInstall Lang="en" Title="Install Information" Type="pre">
-        
-            &lt;br/&gt;
-            WELCOME&lt;br/&gt;
-            &lt;br/&gt;
-            You are about to install DynamicFieldRemoteDB for OTRS.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            c.a.p.e. IT ...easy.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-        
-    </IntroInstall>
-    <IntroInstall Lang="en" Title="Install Information" Type="post">
-        
-            &lt;br/&gt;
-            The package has been installed.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;strong&gt;Important Advice:&lt;/strong&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            It is recommended to delete the OTRS-cache and perform a configuration rebuild before you continue the use of this OTRS installation.
-            &lt;br/&gt;
-            &lt;br/&gt;
-            c.a.p.e. IT ...easy.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-        
-    </IntroInstall>
-    <IntroUninstall Lang="en" Title="Uninstall Information" Type="pre">
-        
-            &lt;br/&gt;
-            WELCOME&lt;br/&gt;
-            &lt;br/&gt;
-            You are about to UNINSTALL DynamicFieldRemoteDB for OTRS.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;strong&gt;Important Advice:&lt;/strong&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            All dynamic fields of type RemoteDB will be deleted with all related ticket values
-            &lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            c.a.p.e. IT ...easy.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-        
-    </IntroUninstall>
-    <IntroUninstall Lang="en" Title="Uninstall Information" Type="post">
-        
-            &lt;br/&gt;
-            The package has been uninstalled.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            c.a.p.e. IT ...easy.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-        
-    </IntroUninstall>
-    <IntroUpgrade Lang="en" Title="Upgrade Information" Type="pre">
-        
-            &lt;br/&gt;
-            WELCOME&lt;br/&gt;
-            &lt;br/&gt;
-            You are about to upgrade DynamicFieldRemoteDB for OTRS.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            c.a.p.e. IT ...easy.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-        
-    </IntroUpgrade>
-    <IntroUpgrade Lang="en" Title="Upgrade Information" Type="post">
-        
-            &lt;br/&gt;
-            The package has been upgraded.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;strong&gt;Important Advice:&lt;/strong&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-            It is recommended to delete the OTRS-cache and perform a configuration rebuild before you continue the use of this OTRS installation.
-            &lt;br/&gt;
-            &lt;br/&gt;
-            c.a.p.e. IT ...easy.&lt;br/&gt;
-            &lt;br/&gt;
-            &lt;br/&gt;
-        
-    </IntroUpgrade>
-    <CodeInstall Type="post">
-    $Kernel::OM-&gt;Get('var::packagesetup::DynamicFieldRemoteDB')-&gt;CodeInstall();
-    </CodeInstall>
-    <CodeUpgrade Type="post">
-    $Kernel::OM-&gt;Get('var::packagesetup::DynamicFieldRemoteDB')-&gt;CodeUpgrade();
-    </CodeUpgrade>
-    <CodeUpgrade Version="4.99.80" Type="post">
-    $Kernel::OM-&gt;Get('var::packagesetup::DynamicFieldRemoteDB')-&gt;CodeUpgrade_5();
-    </CodeUpgrade>
-    <CodeUpgrade Version="5.0.1" Type="post">
-    $Kernel::OM-&gt;Get('var::packagesetup::DynamicFieldRemoteDB')-&gt;CodeUpgrade_5_0_1();
-    </CodeUpgrade>
-    <CodeUninstall Type="pre">
-    $Kernel::OM-&gt;Get('var::packagesetup::DynamicFieldRemoteDB')-&gt;CodeUninstall();
-    </CodeUninstall>
-    <CodeReinstall Type="post">
-    $Kernel::OM-&gt;Get('var::packagesetup::DynamicFieldRemoteDB')-&gt;CodeReinstall();
-    </CodeReinstall>
-    
-    
+    <Description Lang="en">DynamicField backend to provide access to RemoteDB for OTRS</Description>
+    <License>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</License>
     <Filelist>
-        <File Location="Kernel/Config/Files/DynamicFieldRemoteDB.xml" Permission="644"/>
-        <File Location="Kernel/Language/de_DynamicFieldRemoteDB.pm" Permission="644"/>
-        <File Location="Kernel/Modules/AdminDynamicFieldRemoteDB.pm" Permission="644"/>
-        <File Location="Kernel/Modules/DynamicFieldRemoteDBAJAXHandler.pm" Permission="644"/>
-        <File Location="Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldRemoteDB.tt" Permission="644"/>
-        <File Location="Kernel/System/DynamicField/Driver/RemoteDB.pm" Permission="644"/>
-        <File Location="Kernel/System/DFRemoteDB.pm" Permission="644"/>
-        <File Location="doc/CHANGES_DynamicFieldRemoteDB.md" Permission="644"/>
-        <File Location="doc/de/DynamicFieldRemoteDB.pdf" Permission="644"/>
-        <File Location="var/packagesetup/DynamicFieldRemoteDB.pm" Permission="644"/>
+        <File Permission="644" Location="Kernel/Config/Files/XML/DynamicFieldRemoteDB.xml" />
+        <File Permission="644" Location="Kernel/Language/de_DynamicFieldRemoteDB.pm" />
+        <File Permission="644" Location="Kernel/Modules/AdminDynamicFieldRemoteDB.pm" />
+        <File Permission="644" Location="Kernel/Modules/DynamicFieldRemoteDBAJAXHandler.pm" />
+        <File Permission="644" Location="Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldRemoteDB.tt" />
+        <File Permission="644" Location="Kernel/System/DFRemoteDB.pm" />
+        <File Permission="644" Location="Kernel/System/DynamicField/Driver/RemoteDB.pm" />
+        <File Permission="644" Location="doc/CHANGES_DynamicFieldRemoteDB.md" />
+        <File Permission="644" Location="doc/DynamicFieldRemoteDB.json" />
+        <File Permission="644" Location="doc/de/DynamicFieldRemoteDB.pdf" />
+        <File Permission="644" Location="var/packagesetup/DynamicFieldRemoteDB.pm" />
     </Filelist>
-    <DatabaseInstall>
-    </DatabaseInstall>
-    <DatabaseUpgrade>
-    </DatabaseUpgrade>
-    <DatabaseReinstall>
-    </DatabaseReinstall>
-    <DatabaseUninstall>
-    </DatabaseUninstall>
+    <CodeInstall Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::' . $Param{Structure}->{Name}->{Content} )->CodeInstall();
+    ]]></CodeInstall>
+    <CodeUninstall Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::' . $Param{Structure}->{Name}->{Content} )->CodeUninstall();
+    ]]></CodeUninstall>
+    <CodeReinstall Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::' . $Param{Structure}->{Name}->{Content} )->CodeReinstall();
+    ]]></CodeReinstall>
+    <CodeUpgrade Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::' . $Param{Structure}->{Name}->{Content} )->CodeUpgrade();
+    ]]></CodeUpgrade>
+    <CodeUpgrade Type="post" Version="4.99.80"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::' . $Param{Structure}->{Name}->{Content} )->CodeUpgrade_5();
+    ]]></CodeUpgrade>
+    <CodeUpgrade Type="post" Version="5.0.1"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::' . $Param{Structure}->{Name}->{Content} )->CodeUpgrade_5_0_1();
+    ]]></CodeUpgrade>
+    <IntroInstall Type="post" Lang="en" Title="Install Information"><![CDATA[
+            <strong>WELCOME</strong><br />
+<br />
+You are about to install the OTRS module DynamicFieldITSMConfigItem.<br />
+<br />
+<strong>Important Advice:</strong><br />
+<br />
+It is recommended to delete the OTRS-cache and perform a configuration rebuild before you continue the use of this OTRS installation.
+    ]]></IntroInstall>
+    <IntroUpgrade Type="post" Lang="en" Title="Install Information"><![CDATA[
+            <strong>WELCOME</strong><br />
+<br />
+You are about to install the OTRS module DynamicFieldITSMConfigItem.<br />
+<br />
+<strong>Important Advice:</strong><br />
+<br />
+<br />
+It is recommended to delete the OTRS-cache and perform a configuration rebuild before you continue the use of this OTRS installation.
+    ]]></IntroUpgrade>
 </otrs_package>

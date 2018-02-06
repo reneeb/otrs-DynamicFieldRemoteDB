@@ -1,6 +1,7 @@
 # --
 # DynamicFieldRemoteDB.pm - code run during package de-/installation
 # Copyright (C) 2006-2016 c.a.p.e. IT GmbH, http://www.cape-it.de
+# Maintenance 2018 - Perl-Services.de, http://perl-services.de
 #
 # written/edited by:
 # * Torsten(dot)Thau(at)cape(dash)it(dot)de
@@ -49,45 +50,6 @@ All functions
 
 create an object
 
-    use Kernel::Config;
-    use Kernel::System::Log;
-    use Kernel::System::Main;
-    use Kernel::System::Time;
-    use Kernel::System::DB;
-    use Kernel::System::XML;
-
-    my $ConfigObject = Kernel::Config->new();
-    my $LogObject    = Kernel::System::Log->new(
-        ConfigObject => $ConfigObject,
-    );
-    my $MainObject = Kernel::System::Main->new(
-        ConfigObject => $ConfigObject,
-        LogObject    => $LogObject,
-    );
-    my $TimeObject = Kernel::System::Time->new(
-        ConfigObject => $ConfigObject,
-        LogObject    => $LogObject,
-    );
-    my $DBObject = Kernel::System::DB->new(
-        ConfigObject => $ConfigObject,
-        LogObject    => $LogObject,
-        MainObject   => $MainObject,
-    );
-    my $XMLObject = Kernel::System::XML->new(
-        ConfigObject => $ConfigObject,
-        LogObject    => $LogObject,
-        DBObject     => $DBObject,
-        MainObject   => $MainObject,
-    );
-    my $CodeObject = var::packagesetup::CordesGraefe->new(
-        ConfigObject => $ConfigObject,
-        LogObject    => $LogObject,
-        MainObject   => $MainObject,
-        TimeObject   => $TimeObject,
-        DBObject     => $DBObject,
-        XMLObject    => $XMLObject,
-    );
-
 =cut
 
 sub new {
@@ -106,26 +68,6 @@ sub new {
     $Self->{ReverseValidList} = \%TmpHash2;
     $Self->{ValidList}        = \%Validlist;
 
-    # create needed sysconfig object...
-    $Self->{SysConfigObject} = $Kernel::OM->Get('Kernel::System::SysConfig');
-    $Self->{SysConfigObject}->WriteDefault();
-    my @ZZZFiles = (
-        'ZZZAAuto.pm',
-        'ZZZAuto.pm',
-    );
-
-    # reload the ZZZ files (mod_perl workaround)
-    for my $ZZZFile (@ZZZFiles) {
-        PREFIX:
-        for my $Prefix (@INC) {
-            my $File = $Prefix . '/Kernel/Config/Files/' . $ZZZFile;
-            if ( !-f $File ) {
-                next PREFIX
-            }
-            do $File;
-            last PREFIX;
-        }
-    }
     return $Self;
 }
 
