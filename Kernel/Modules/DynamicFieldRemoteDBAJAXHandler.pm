@@ -83,12 +83,19 @@ sub Run {
         my @ParamNames = $Self->{ParamObject}->GetParamNames();
         my %WebParams  = map { $_ => 1 } @ParamNames;
 
-        my $DFRemoteDBObject = Kernel::System::DFRemoteDB->new(
-            DatabaseDSN  => $DynamicFieldConfig->{Config}->{DatabaseDSN},
-            DatabaseUser => $DynamicFieldConfig->{Config}->{DatabaseUser},
-            DatabasePw   => $DynamicFieldConfig->{Config}->{DatabasePw},
-            %{ $Self },
-        );
+        my $DFRemoteDBObject;
+
+        if ( $DynamicFieldConfig->{Config}->{UseOTRSDB} ) {
+            $DFRemoteDBObject = $Kernel::OM->Get('Kernel::System::DB');
+        }
+        else {
+            $DFRemoteDBObject = Kernel::System::DFRemoteDB->new(
+                DatabaseDSN  => $DynamicFieldConfig->{Config}->{DatabaseDSN},
+                DatabaseUser => $DynamicFieldConfig->{Config}->{DatabaseUser},
+                DatabasePw   => $DynamicFieldConfig->{Config}->{DatabasePw},
+                %{ $Self },
+            );
+        }
 
         #handle subaction Search
         if ($Subaction eq 'Search') {

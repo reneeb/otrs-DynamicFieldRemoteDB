@@ -134,7 +134,14 @@ sub _AddAction {
     my %Errors;
     my %GetParam;
 
-    for my $Needed (qw(Name Label FieldOrder MaxArraySize DatabaseDSN DatabaseUser DatabasePw DatabaseTable DatabaseFieldKey)) {
+    my $UseOTRSDB =  $Self->{ParamObject}->GetParam( Param => 'UseOTRSDB');
+
+    my @Needed = qw(Name Label FieldOrder MaxArraySize DatabaseTable DatabaseFieldKey);
+    if ( !$UseOTRSDB ) {
+        push @Needed = qw(DatabaseDSN DatabaseUser DatabasePw);
+    }
+
+    for my $Needed ( @Needed ) {
         $GetParam{$Needed} = $Self->{ParamObject}->GetParam( Param => $Needed );
         if ( !$GetParam{$Needed} ) {
             $Errors{ $Needed . 'ServerError' }        = 'ServerError';
@@ -234,6 +241,7 @@ sub _AddAction {
         SearchSuffix        => $GetParam{SearchSuffix}        || '',
         MaxArraySize        => $GetParam{MaxArraySize}        || 1,
         CacheTTL            => $GetParam{CacheTTL}            || 0,
+        UseOTRSDB           => $UseOTRSDB                     || 0,
         CachePossibleValues => $GetParam{CachePossibleValues} || 0,
         ShowKeyInTitle      => $GetParam{ShowKeyInTitle}      || 0,
         ItemSeparator       => $GetParam{ItemSeparator}       || ', ',
@@ -324,7 +332,14 @@ sub _ChangeAction {
     my %Errors;
     my %GetParam;
 
-    for my $Needed (qw(Name Label FieldOrder MaxArraySize DatabaseDSN DatabaseUser DatabasePw DatabaseTable DatabaseFieldKey)) {
+    my $UseOTRSDB =  $Self->{ParamObject}->GetParam( Param => 'UseOTRSDB');
+
+    my @Needed = qw(Name Label FieldOrder MaxArraySize DatabaseTable DatabaseFieldKey);
+    if ( !$UseOTRSDB ) {
+        push @Needed = qw(DatabaseDSN DatabaseUser DatabasePw);
+    }
+
+    for my $Needed (@Needed) {
         $GetParam{$Needed} = $Self->{ParamObject}->GetParam( Param => $Needed );
         if ( !$GetParam{$Needed} ) {
             $Errors{ $Needed . 'ServerError' }        = 'ServerError';
@@ -471,6 +486,7 @@ sub _ChangeAction {
         SearchSuffix        => $GetParam{SearchSuffix}        || '',
         MaxArraySize        => $GetParam{MaxArraySize}        || 1,
         CacheTTL            => $GetParam{CacheTTL}            || 0,
+        UseOTRSDB           => $UseOTRSDB                     || 0,
         CachePossibleValues => $GetParam{CachePossibleValues} || 0,
         ShowKeyInTitle      => $GetParam{ShowKeyInTitle}      || 0,
         ItemSeparator       => $GetParam{ItemSeparator}       || ', ',
@@ -540,6 +556,7 @@ sub _ShowScreen {
     $Param{MaxQueryResult}      = $Param{Config}->{MaxQueryResult}      || 10;
     $Param{CaseSensitive}       = $Param{Config}->{CaseSensitive};
     $Param{DefaultValues}       = $Param{Config}->{DefaultValues}       || [];
+    $Param{UseOTRSDB}           = $Param{Config}->{UseOTRSDB};
 
     # header
     my $Output = $Self->{LayoutObject}->Header();

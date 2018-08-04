@@ -1,13 +1,13 @@
 # --
 # AdminDynamicFieldRemoteDB.dtl - Based on AdminDynamicFieldText.tt - provides HTML form for AdminDynamicFieldsRemoteDB
 # Copyright (C) 2006-2016 c.a.p.e. IT GmbH, http://www.cape-it.de
+# Changes Copyright (C) 2018 Perl-Services.de, http://perl-services.de
 #
 # written/edited by:
 # * Mario(dot)Illinger(at)cape(dash)it(dot)de
 # * Stefan(dot)Mehlig(at)cape(dash)it(dot)de
 # * Anna(dot)Litvinova(at)cape(dash)it(dot)de
-# --
-# $Id: AdminDynamicFieldRemoteDB.tt,v 1.5 2016/05/30 13:20:18 millinger Exp $
+# * info(at)perl-services(dot)de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -112,6 +112,32 @@
                 <div class="Content">
                     <fieldset class="TableLike">
 
+                        <label for="UseOTRSDB">[% Translate("Use OTRS DB") | html %]:</label>
+                        <div class="Field">
+                            <input id="UseOTRSDB" class="W25pc" type="checkbox"  value="1" [% IF Data.UseOTRSDB %]checked="checked"[% END %] name="UseOTRSDB">
+                            <p class="FieldExplanation">[% Translate("Check this when the tables are stored in the OTRS DB.") | html %]</p>
+[% WRAPPER JSOnDocumentComplete %]
+<script type="text/javascript">//<![CDATA[
+$('#UseOTRSDB').bind('change', function (Event) {
+console.debug("Triggered change");
+    var Fields = new Array ("DatabaseDSN", "DatabaseUser");
+    if ( $(this).is(':checked') ) {
+        $.each( Fields, function( FieldIndex, FieldName ) {
+            $('label[for="' + FieldName + '"]').removeClass( 'Mandatory' );
+            $('#' + FieldName).removeClass( 'Validate_Required' );
+        });
+    }
+    else {
+        $.each( Fields, function( FieldIndex, FieldName ) {
+            $('label[for="' + FieldName + '"]').addClass( 'Mandatory' );
+            $('#' + FieldName).addClass( 'Validate_Required' );
+        });
+    }
+});
+$('#UseOTRSDB').trigger('change');
+//]]></script>
+[% END %]
+                        </div>
                         <label class="Mandatory" for="DatabaseDSN"><span class="Marker">*</span> [% Translate("DatabaseDSN") | html %]:</label>
                         <div class="Field">
                             <input id="DatabaseDSN" class="W50pc Validate_Required [% Data.DatabaseDSNServerError | html %]" type="text"  value="[% Data.DatabaseDSN | html %]" name="DatabaseDSN">

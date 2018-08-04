@@ -180,12 +180,19 @@ sub ValueLookup {
     return if (!defined ($Param{Key}));
     return '' if ($Param{Key} eq '');
 
-    my $DFRemoteDBObject = Kernel::System::DFRemoteDB->new(
-        DatabaseDSN  => $Param{DynamicFieldConfig}->{Config}->{DatabaseDSN},
-        DatabaseUser => $Param{DynamicFieldConfig}->{Config}->{DatabaseUser},
-        DatabasePw   => $Param{DynamicFieldConfig}->{Config}->{DatabasePw},
-        %{ $Self },
-    );
+    my $DFRemoteDBObject;
+
+    if ( $Param{DynamicFieldConfig}->{Config}->{UseOTRSDB} ) {
+        $DFRemoteDBObject = $Kernel::OM->Get('Kernel::System::DB');
+    }
+    else {
+        $DFRemoteDBObject = Kernel::System::DFRemoteDB->new(
+            DatabaseDSN  => $Param{DynamicFieldConfig}->{Config}->{DatabaseDSN},
+            DatabaseUser => $Param{DynamicFieldConfig}->{Config}->{DatabaseUser},
+            DatabasePw   => $Param{DynamicFieldConfig}->{Config}->{DatabasePw},
+            %{ $Self },
+        );
+    }
 
     # return array or scalar depending on $Param{Key}
     my $Result;
@@ -1527,12 +1534,19 @@ sub _GetPossibleValues {
         return $PossibleValues if $PossibleValues;
     }
 
-    my $DFRemoteDBObject = Kernel::System::DFRemoteDB->new(
-        DatabaseDSN  => $Param{DynamicFieldConfig}->{Config}->{DatabaseDSN},
-        DatabaseUser => $Param{DynamicFieldConfig}->{Config}->{DatabaseUser},
-        DatabasePw   => $Param{DynamicFieldConfig}->{Config}->{DatabasePw},
-        %{ $Self },
-    );
+    my $DFRemoteDBObject;
+
+    if ( $Param{DynamicFieldConfig}->{Config}->{UseOTRSDB} ) {
+        $DFRemoteDBObject = $Kernel::OM->Get('Kernel::System::DB');
+    }
+    else {
+        $DFRemoteDBObject = Kernel::System::DFRemoteDB->new(
+            DatabaseDSN  => $Param{DynamicFieldConfig}->{Config}->{DatabaseDSN},
+            DatabaseUser => $Param{DynamicFieldConfig}->{Config}->{DatabaseUser},
+            DatabasePw   => $Param{DynamicFieldConfig}->{Config}->{DatabasePw},
+            %{ $Self },
+        );
+    }
 
     my %Constrictions = ();
     if ($Param{DynamicFieldConfig}->{Config}->{Constrictions}) {
