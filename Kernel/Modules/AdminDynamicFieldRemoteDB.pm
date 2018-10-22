@@ -138,7 +138,7 @@ sub _AddAction {
 
     my @Needed = qw(Name Label FieldOrder MaxArraySize DatabaseTable DatabaseFieldKey);
     if ( !$UseOTRSDB ) {
-        push @Needed = qw(DatabaseDSN DatabaseUser DatabasePw);
+        push @Needed, qw(DatabaseDSN DatabaseUser DatabasePw);
     }
 
     for my $Needed ( @Needed ) {
@@ -336,7 +336,7 @@ sub _ChangeAction {
 
     my @Needed = qw(Name Label FieldOrder MaxArraySize DatabaseTable DatabaseFieldKey);
     if ( !$UseOTRSDB ) {
-        push @Needed = qw(DatabaseDSN DatabaseUser DatabasePw);
+        push @Needed, qw(DatabaseDSN DatabaseUser DatabasePw);
     }
 
     for my $Needed (@Needed) {
