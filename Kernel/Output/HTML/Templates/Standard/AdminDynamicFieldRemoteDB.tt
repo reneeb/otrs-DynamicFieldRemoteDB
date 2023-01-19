@@ -1,7 +1,7 @@
 # --
 # AdminDynamicFieldRemoteDB.dtl - Based on AdminDynamicFieldText.tt - provides HTML form for AdminDynamicFieldsRemoteDB
 # Copyright (C) 2006-2016 c.a.p.e. IT GmbH, http://www.cape-it.de
-# Changes Copyright (C) 2018 - 2022 Perl-Services.de, https://www.perl-services.de
+# Changes Copyright (C) 2018 - 2023 Perl-Services.de, https://www.perl-services.de
 #
 # written/edited by:
 # * Mario(dot)Illinger(at)cape(dash)it(dot)de
