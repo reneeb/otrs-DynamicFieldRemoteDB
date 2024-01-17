@@ -2,8 +2,8 @@
 <otrs_package version="1.0">
     <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.4) -->
     <Name>DynamicFieldRemoteDB</Name>
-    <Version>6.0.3</Version>
-    <Framework>6.0.x</Framework>
+    <Version>6.0.4</Version>
+    <Framework>6.x</Framework>
     <Vendor>Perl-Services.de</Vendor>
     <URL>http://www.perl-services.de</URL>
     <Description Lang="de">DynamicField-Backend zur Bereitstellung des Zugangs zu Datenbanken fuer OTRS</Description>
